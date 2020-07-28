@@ -1,0 +1,9 @@
+.voteUp:hover {
+   opacity: 0.8;
+}
+.voteDown:hover {
+    opacity: 0.8;
+ }
+ .voteComment:hover {
+    opacity: 0.8;
+ }
