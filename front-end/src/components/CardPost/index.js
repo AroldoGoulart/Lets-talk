@@ -51,20 +51,30 @@ const renderButtons = (upVotes, downVotes, comments) => {
 }
 */
 
-const voteUp = data => {
-  alert('up')
+let isBeingUsed = false;
+
+const voteUp = async data => {
+  isBeingUsed=true;
+  await console.log('up');
+  isBeingUsed=false;
 }
 
-const voteDown = data => {
-  alert('down')
+const voteDown = async data => {
+  isBeingUsed=true;
+  await console.log('down');
+  isBeingUsed=false;
 }
 
-const voteComments = data => {
-  alert('comment')
+const voteComments = async data => {
+  isBeingUsed=true;
+  await console.log('comments');
+  isBeingUsed=false;
 }
 
-const openCard = data => {
-  alert('card opened')
+const openCard = async data => {
+  if(!isBeingUsed) {
+    console.log('card');
+  }
 }
 
 const renderButtons = (upVotes, downVotes, comments, tags) => {
@@ -72,7 +82,7 @@ const renderButtons = (upVotes, downVotes, comments, tags) => {
   return (
     <Grid style={{ paddingTop: 10, paddingBottom: 10, paddingRight: 10,}}>
     <div style={{ flex: 1,  flexDirection: 'column' }}>
-
+      
       <a onClick={() => voteUp()}>
       <Icon className="voteUp" color="green" name="angle up" ></Icon>
         {upVotes}
@@ -87,6 +97,7 @@ const renderButtons = (upVotes, downVotes, comments, tags) => {
         <Icon className="voteComment" name="comments" ></Icon>
         {comments}
       </a>    
+
     </div>
     {tags && tags[0] &&
       <a>
@@ -109,7 +120,7 @@ const CardMainPage = post => {
   }
 
   return(
-  <Card onClick={() => openCard(data)}  elevation={1} color={getRandownColor()} style={{ minWidth: 450 }} >
+  <Card onClick={() => !isBeingUsed ? openCard(data) : {} }  elevation={1} color={getRandownColor()} style={{ minWidth: 450 }} >
     <Card.Content header={header} />
     <Card.Content description={description.length >= 163 ? `${description.slice(0, 160)}...` : description} />
     <Card.Content style={{ flexDirection: 'row' }} extra>
