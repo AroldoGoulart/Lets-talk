@@ -120,7 +120,7 @@ const CardMainPage = post => {
   }
 
   return(
-  <Card onClick={() => !isBeingUsed ? openCard(data) : {} }  elevation={1} color={getRandownColor()} style={{ minWidth: 450 }} >
+  <Card onClick={() => !isBeingUsed ? openCard(data) : {} }  elevation={1} color={getRandownColor()} style={{ minWidth: 400 }} >
     <Card.Content header={header} />
     <Card.Content description={description.length >= 163 ? `${description.slice(0, 160)}...` : description} />
     <Card.Content style={{ flexDirection: 'row' }} extra>
@@ -134,7 +134,7 @@ function CardPost() {
     <div>
     <Card.Group centered >
     { 
-    posts.map( post => <CardMainPage key={post.header+post.description}data={post}/> )
+    posts.map( post => <CardMainPage key={post.header+post.description} data={post}/> )
     }
     </Card.Group>
     </div>
