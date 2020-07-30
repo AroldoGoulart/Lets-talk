@@ -126,11 +126,11 @@ const CardMainPage = post => {
   }
 
   return(
-  <Card onClick={() => !isBeingUsed ? openCard(data) : {} }  elevation={1} color={getRandownColor()} style={{ minWidth: 400 }} >
+  <Card onClick={() => !isBeingUsed ? openCard(data) : {} }  elevation={1} color={getRandownColor()} style={{ minWidth: 420 }} >
     <Card.Content header={header} />
     <Card.Content description={description.length >= 163 ? `${description.slice(0, 160)}...` : description} />
     <Card.Content style={{ flexDirection: 'row' }} extra>
-      {renderButtons(upVotes, downVotes, comments, tags)}
+      {renderButtons(upVotes, downVotes, comments.length, tags)}
     </Card.Content>
   </Card>
 )}
@@ -146,7 +146,7 @@ function CardPost(props) {
     posts.map( post => <CardMainPage key={post.header+post.description} data={post}/> )
     }
     </Card.Group>
-    <CardOpened open={open} onChangeModal={onChangeModal} data={data} />
+    <CardOpened voteUp={voteUp} voteDown={voteDown} voteComments={voteComments} open={open} onChangeModal={onChangeModal} data={data} />
 
     </div>
   );

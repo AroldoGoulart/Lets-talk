@@ -42,7 +42,6 @@ function TextInput(props) {
         }
         */
 
-        await alert('Enviado com sucesso!');
     }
 
     const letsDoIt = async () => {
