@@ -5,10 +5,6 @@ import { Modal, Button, TextArea, Segment, Portal, Header } from 'semantic-ui-re
 import { Categorias } from '../../api/categories';
 import Select from "react-dropdown-select";
 
-const postData = async (titulo, categoria, descricao) => {
-    await alert('Enviado com sucesso!');
-}
-
 function TextInput(props) {
     let { open, onChangeModal } = props;
     let borderColor = '#a8a8a8';
@@ -18,16 +14,43 @@ function TextInput(props) {
     const [categoria, setCategoria] = useState();
     const [descricao, setDescricao] = useState();
     const [validation, setValidation] = useState();
+    // const [userName, setUserName] = useState();
+
+    const postData = async (titulo, categoria, descricao) => {
+        /*
+        let url = 'http://names.drycodes.com/1';
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        
+        let user = ""
+
+        await fetch(proxyurl + url)
+            .then(response => response.text())
+            .then(data => user = data)
+            .catch(() => alert('Erro de conexão, experimente recarregar a pagina.'))
+
+        console.log(user)
+
+        */
+         /*   
+        let promiseName = await fetch('http://names.drycodes.com/1',  { headers });
+        if (promiseName.ok) { 
+            //let json = await promiseName.json();
+            //console.log(json)
+        } 
+        else {
+            alert('Erro de conexão, tente  enviar novamente!');
+        }
+        */
+
+        await alert('Enviado com sucesso!');
+    }
 
     const letsDoIt = async () => {
         await postData(titulo, categoria, descricao);
         await resetAlldata();
-
         onChangeModal(false);
-
         setOpenPopUp(true);
         closePopUp();
-       
     }   
     
     const resetAlldata = () => {

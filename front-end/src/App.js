@@ -7,12 +7,13 @@ import TextInput from './components/TextInput';
 
 function App() {
   const [openModel, setOpenModel] = useState(false);
+  const [openModelCard, setOpenModelCard] = useState(false);
 
   return (
     <div style={{ justifyContent: 'center' }}>
       <Header/>
       <TextInput open={openModel} onChangeModal={setOpenModel} />
-      <CardPost/>
+      <CardPost open={openModelCard} onChangeModal={setOpenModelCard} />
     </div>
   );
 }

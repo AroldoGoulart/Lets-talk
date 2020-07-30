@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-// import './App.css';
-import { Card, Grid, Icon } from 'semantic-ui-react'
-import './styles.css'
-import { posts } from '../../api/posts'
+import { Card, Grid, Icon } from 'semantic-ui-react';
+import CardOpened from '../CardOpened';
+import './styles.css';
+import { posts } from '../../api/posts';
 
 /*
 possivel outro estilo
@@ -52,6 +52,8 @@ const renderButtons = (upVotes, downVotes, comments) => {
 */
 
 let isBeingUsed = false;
+let data = [];
+let changeModal = () => {};
 
 const voteUp = async data => {
   isBeingUsed=true;
@@ -71,15 +73,17 @@ const voteComments = async data => {
   isBeingUsed=false;
 }
 
-const openCard = async data => {
+const openCard = async posts => {
   if(!isBeingUsed) {
-    console.log('card');
+    changeModal(true)
+    data = posts;
   }
 }
 
 const renderButtons = (upVotes, downVotes, comments, tags) => {
   
   return (
+    <div>    
     <Grid style={{ paddingTop: 10, paddingBottom: 10, paddingRight: 10,}}>
     <div style={{ flex: 1,  flexDirection: 'column' }}>
       
@@ -107,7 +111,9 @@ const renderButtons = (upVotes, downVotes, comments, tags) => {
       } 
       </a>
     }
+
     </Grid> 
+    </div>
   ) 
 }
 
@@ -129,7 +135,10 @@ const CardMainPage = post => {
   </Card>
 )}
 
-function CardPost() {
+function CardPost(props) {
+  let { open, onChangeModal } = props;
+  changeModal = onChangeModal;
+
   return (
     <div>
     <Card.Group centered >
@@ -137,6 +146,8 @@ function CardPost() {
     posts.map( post => <CardMainPage key={post.header+post.description} data={post}/> )
     }
     </Card.Group>
+    <CardOpened open={open} onChangeModal={onChangeModal} data={data} />
+
     </div>
   );
 }
