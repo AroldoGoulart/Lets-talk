@@ -1,23 +1,34 @@
 import React from 'react';
 import { Icon } from 'semantic-ui-react'
 
+function Header(props) {
+  const { setIsOpenMain } = props;
 
-function Header() {
+  function signOut() {
+    localStorage.removeItem('isOpen');
+    localStorage.removeItem('letsTalkeNickName');
+    setIsOpenMain(true);
+  }
+
   return (
-    <div 
-    style={{ 
-      display: 'flex', 
-      width: '100%', 
-      backgroundColor: '#60c0e0', 
-      marginBottom: 20,
-      flexDirection: 'column'
-    }}>
-        <div style={{ marginLeft: 25, padding: 5, marginTop: 5 }}> 
-          <Icon inverted size="big" name="talk"/>
-          <a style={{ fontSize: 20, marginTop: 0, color: 'white' }}> Lets Talk !</a>
-
-        </div>
-
+    <div
+      style={{
+        alignItems: 'center',
+        backgroundColor: '#60c0e0',
+        display: 'flex',
+        height: '80px',
+        justifyContent: 'space-between',
+        marginBottom: 20,
+        padding: '3px 12px 3px 12px',
+        width: '100%',
+      }}>
+      <div style={{ padding: 5 }}>
+        <Icon inverted size="big" name="talk" />
+        <a style={{ color: 'white', fontSize: 20, marginTop: 0 }} href="/"> Let's Talk!</a>
+      </div>
+      <div style={{ cursor: 'pointer', padding: 5 }} onClick={() => signOut()}>
+        <Icon inverted size="big" name="sign-out alternate" />
+      </div>
     </div>
   );
 }
