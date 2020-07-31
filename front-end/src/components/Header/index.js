@@ -16,9 +16,8 @@ function Header(props) {
         alignItems: 'center',
         backgroundColor: '#60c0e0',
         display: 'flex',
-        height: '80px',
+        height: '50px',
         justifyContent: 'space-between',
-        marginBottom: 20,
         padding: '3px 12px 3px 12px',
         width: '100%',
       }}>

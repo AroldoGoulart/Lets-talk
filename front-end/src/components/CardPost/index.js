@@ -5,52 +5,6 @@ import CardOpened from '../CardOpened';
 import api from '../../services/api';
 import './styles.css';
 
-/*
-possivel outro estilo
-const renderButtons = (upVotes, downVotes, comments) => {
-  return(
-    <div>
-    <Button
-      color='green'
-      content=''
-      icon='angle up'
-      size="mini"
-      label={{ 
-        basic: true, 
-        color: 'green', 
-        pointing: 'left', 
-        content: upVotes 
-      }}
-    />
-    <Button
-      color='red'
-      content=''
-      icon='angle down'
-      size="mini"
-      label={{ 
-        basic: true, 
-        color: 'red', 
-        pointing: 'center', 
-        content: downVotes
-      }}
-    />
-    <Button
-      color='blue'
-      content=''
-      icon='comments'
-      size="mini"
-      label={{ 
-        basic: true, 
-        color: 'blue', 
-        pointing: 'rigth', 
-        content: comments 
-      }}
-    />
-    </div>
-  )
-}
-*/
-
 let isBeingUsed = false;
 let data = [];
 let changeModal = () => { };
@@ -155,7 +109,12 @@ function CardPost(props) {
   return (
     <div>
       <Card.Group centered >
-        {loading ? <strong>Carregando...</strong> : posts.map(post => <CardMainPage key={post.header + post.description} data={post} />)}
+        {loading ?  
+        <div style={{ display:'flex', margin: 50 }}>
+         <h2> Carregando Dados... </h2> 
+         <Icon style={{ marginLeft: 20, marginTop: 3 }} loading size='large' name='spinner' />
+        </div> 
+        : posts.map(post => <CardMainPage key={post.header + post.description} data={post} />)}
       </Card.Group>
       <CardOpened voteUp={voteUp} voteDown={voteDown} voteComments={voteComments} open={open} onChangeModal={onChangeModal} data={data} />
     </div>
