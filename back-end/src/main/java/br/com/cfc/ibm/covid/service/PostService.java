@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -14,7 +15,7 @@ public class PostService {
     private PostRepository postRepository;
 
     public List<Post> all() {
-        return postRepository.findAll();
+        return postRepository.findAllByOrderByIdDesc();
     }
 
     public Post byId(Long id) {
@@ -24,4 +25,30 @@ public class PostService {
     public Post save(Post post) {
         return postRepository.save(post);
     }
+
+    public Post post (Post post, String comment) {
+        return post;
+    }
+
+    public Post downVote(Long id, String username) {
+        var post = postRepository.findById(id).get();
+        post.downVote();
+        postRepository.save(post);
+        return post;
+    }
+
+    public Post upVote(Long id, String username) {
+        var post = postRepository.findById(id).get();
+        post.upVote();
+        postRepository.save(post);
+        return post;
+    }
+
+    public Post comment(Long id, String comment) {
+        var post = postRepository.findById(id).get();
+        post.setNewComment(comment);
+        postRepository.save(post);
+        return post;
+    }
+
 }

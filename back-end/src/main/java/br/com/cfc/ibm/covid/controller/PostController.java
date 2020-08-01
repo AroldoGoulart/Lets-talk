@@ -29,4 +29,22 @@ public class PostController {
     public Post save(@RequestBody Post post) {
         return postService.save(post);
     }
+
+    @PutMapping("{id}/downvote")
+    public Post downVote(@PathVariable Long id, @RequestBody String username) {
+        return postService.downVote(id, username);
+    }
+
+    @PutMapping("{id}/upvote")
+    public Post upVote(@PathVariable Long id, @RequestBody String username) {
+        return postService.upVote(id, username);
+    }
+
+    @PutMapping("{id}/comment")
+    public Post comment(@PathVariable Long id, @RequestBody String comment){
+        System.out.println(comment);
+        return postService.comment(id, comment);
+    }
+
+
 }
