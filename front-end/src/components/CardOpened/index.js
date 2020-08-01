@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useLayoutEffect, useState } from 'react';
 import { Grid, Header, Icon, Modal, Portal, Segment, TextArea } from 'semantic-ui-react'
+import axios from 'axios';
 import './styles.css';
 
 function CardOpened(props) {
@@ -9,7 +10,7 @@ function CardOpened(props) {
   const [newComment, setNewComment] = useState('');
 
   let { open, onChangeModal, data } = props;
-  let { comments, header, upVotes, downVotes, id, description } = data;
+  let { comments, description, downVotes, header, id, upVotes, username } = data;
   let { voteUp, voteDown, voteComments } = props;
 
   useLayoutEffect(() => {
@@ -23,7 +24,7 @@ function CardOpened(props) {
   }, []);
 
   const closePopUp = () => {
-    setTimeout(() => {setOpenPopUp(false)}, 3000);
+    setTimeout(() => { setOpenPopUp(false) }, 3000);
   }
 
   const calculateGrid = () => {
@@ -65,8 +66,12 @@ function CardOpened(props) {
 
   const sendComment = async () => {
     if (newComment.length >= 10) {
-    }
-    else {
+      let data = {
+        username: localStorage.getItem('letsTalkeNickName'),
+        comment: newComment
+      }
+      await axios.put('post/${id}/comment', data)
+    } else {
     }
 
     await setOpenPopUp(true);
@@ -88,52 +93,40 @@ function CardOpened(props) {
         }}>
           <div style={{ flex: 2 }}>
             <Icon style={{ color: 'white', paddingTop: -10 }} name="angle double up" />
-            <a style={{ color: 'white', fontSize: 22 }}> {calculatePercent()} % de Reputação </a>
+            <a style={{ color: 'white', fontSize: 22 }}>
+              {calculatePercent() ? `${calculatePercent()} % de Reputação` : 'Essa postagem ainda não possui reputação.'}
+            </a>
           </div>
           <div>
             <Icon onClick={() => onChangeModal(false)} style={{ display: 'flex', color: 'white', paddingTop: 5, marginRight: 20 }} name="angle double left" />
           </div>
         </div>
 
-        <Grid
-          style={{
-            marginTop: 0,
-            padding: 20,
-            paddingTop: 0,
-          }}
-          divided='vertically'
-        >
+        <Grid style={{ marginTop: 0, padding: 20, paddingTop: 0 }} divided='vertically'>
           <Grid.Row columns={calculateGrid()}>
             <Grid.Column>
               <h1>{header}</h1>
               <p>{description}</p>
-              <a onClick={() => voteUp()}>
+              <a onClick={() => voteUp(data, upVotes)}>
                 <Icon className="voteUp" color="green" name="angle up" ></Icon>
                 {upVotes}
               </a>
 
-              <a style={{ marginLeft: 8 }} onClick={() => voteDown()} >
+              <a style={{ marginLeft: 8 }} onClick={() => voteDown(data, downVotes)} >
                 <Icon className="voteDown" color="red" name="angle down" ></Icon>
                 {downVotes}
               </a>
 
               <a style={{ marginLeft: 10 }} onClick={() => voteComments()} >
                 <Icon className="voteComment" color="blue" name="comment" ></Icon>
-                {downVotes}
+                {comments || 0}
               </a>
 
             </Grid.Column>
             <Grid.Column style={
-              calculateStyle() >= 350 & calculateGrid() == 1
-                ? {
-                  alignItems: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                }
-                : {}
+              calculateStyle() >= 350 & calculateGrid() == 1 ? { alignItems: 'center', display: 'flex', flexDirection: 'column' } : {}
             }>
               <h1>Comentários</h1>
-
               <div
                 style={{
                   backgroundColor: 'rgba(0, 140, 68, 0.10)',
@@ -146,7 +139,7 @@ function CardOpened(props) {
                 <TextArea
                   value={newComment}
                   onChange={(e, { value }) => setNewComment(value)}
-                  placeholder={"Diga sua opinião, lembre-se, seja gentil ! :D "}
+                  placeholder={"Diga sua opinião, lembre-se, seja gentil! :D "}
                   style={{
                     marginBottom: 0,
                     marginleft: 10,

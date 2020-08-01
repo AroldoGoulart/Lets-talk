@@ -17,7 +17,15 @@ function TextInput(props) {
     // const [userName, setUserName] = useState();
 
     const postData = async (titulo, categoria, descricao) => {
-        await api.post('post', { header: titulo, description: descricao });
+        const data = {
+            category: categoria,
+            description: descricao,
+            downVotes: 0,
+            header: titulo,
+            upVotes: 0,
+            username: localStorage.getItem('letsTalkeNickName'),
+        };
+        await api.post('post', data);
     }
 
     const letsDoIt = async () => {

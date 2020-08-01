@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-
 import { Container, ContainerButton, ContainerFields, ModalBackground, SubTitleSpan, TitleSpan } from './styles.js';
-
-import { Button, TextArea, Icon } from 'semantic-ui-react'
+import { Button, TextArea, Icon, Header } from 'semantic-ui-react'
 
 function ModalLogin(props) {
     const { setIsOpenMain, isOpenMain } = props;
@@ -11,10 +9,9 @@ function ModalLogin(props) {
 
     function onSubmit() {
         if (nickName !== '') {
-            if(nickName.length <= 3 ) {
+            if (nickName.length <= 2) {
                 setNameIsValid(false)
-            }
-            else { 
+            } else {
                 setNameIsValid(true)
                 localStorage.setItem('letsTalkeNickName', nickName);
                 localStorage.setItem('isOpen', true);
@@ -25,14 +22,27 @@ function ModalLogin(props) {
     }
 
     return (
-        <ModalBackground style={{  }} isOpen={isOpenMain}>
+        <ModalBackground style={{}} isOpen={isOpenMain}>
             <Container style={{ width: 450, }} >
+                <div style={{
+                    backgroundColor: '#60c0e0',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    paddingBottom: 10,
+                    paddingLeft: 20,
+                    paddingTop: 12,
+                    width: '100%',
+                }}>
+                    <div style={{ padding: 0 }}>
+                        <Icon inverted size="big" name="talk" />
+                        <a style={{ color: 'white', fontSize: 20, marginleft: 5 }} href="/"> Let's Talk!</a>
+                    </div>
+                </div>
                 <TitleSpan style={{ margin: 20 }}>Acesso</TitleSpan>
-                <SubTitleSpan style={{ marginBottom: 10}}>Insira um apelido</SubTitleSpan>
-                <ContainerFields style={{ display: 'flex', justifyContent: 'center', marginTop: 10}}>
+                <ContainerFields style={{ display: 'flex', justifyContent: 'center', marginTop: 0 }}>
                     <TextArea
                         style={{
-                            display:'flex',
+                            display: 'flex',
                             borderRadius: 5,
                             justifyContent: 'center',
                             alignSelf: 'center',
@@ -46,13 +56,21 @@ function ModalLogin(props) {
                             marginBottom: 5
                         }}
                         onChange={(e, { value }) => setNickName(value)}
-                        placeholder="Digíte um apelido, você não será identificado !"
+                        placeholder="Informe um apelido (você não será identificado)!"
                         value={nickName}
                     />
                 </ContainerFields>
-                { !nameIsValid && <a style={{ marginTop: 10, marginBottom: -10 }}> O apelido precisa ter no minimo três letras. </a> }
+                {
+                    !nameIsValid &&
+                    <a style={{ marginTop: 10, marginBottom: -10 }}>O apelido precisa ter no mínimo três caracteres.</a>
+                }
                 <ContainerButton>
-                    <Button href="#enviar" onClick={() => onSubmit()} style={{ flex: 1, backgroundColor: '#22f73e', color: 'white', margin: 20 }} content='Enviar' />
+                    <Button
+                        href="#enviar"
+                        onClick={() => onSubmit()}
+                        style={{ flex: 1, backgroundColor: '#60c0e0', color: 'white', margin: 20, marginTop: 8 }}
+                        content='Entrar'
+                    />
                 </ContainerButton>
             </Container>
         </ModalBackground>
