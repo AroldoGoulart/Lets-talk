@@ -1,7 +1,6 @@
 # Bem vindo ao Lets Talk!
 ![Introdução](https://github.com/SnowLew/Lets-talk/blob/master/examples/intro2.png)
 
-
 ## O que é Lets Talk?
 Lets Talk é uma aplicação criada com a ideia de solucionar os seguintes problemas:  
 Obs: A ideia de desenvolvimento ocorreu devido ao problema proposto pelo hackathon IBM 2020.
@@ -36,7 +35,10 @@ esse processo. Já estamos isolados, não
 precisamos sair do meio digital.
 
 ## Resultado
-Abaixo se encontra as imagens da interface final da aplicação.
+Abaixo se encontra as imagens da interface final da aplicação e mais um video navegando pela interface.
+
+Video: [Aperte aqui!](https://storage.googleapis.com/shawee-production.appspot.com/shawee/projectfiles/1af1df66-7613-4862-923b-6cb32f1d06a2.mp4)
+
 
 #### Tela Inicial
 ![Login](https://github.com/SnowLew/Lets-talk/blob/master/examples/login.png)
